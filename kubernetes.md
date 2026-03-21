@@ -1,9 +1,8 @@
-KUBERNETES
+# KUBERNETES
 
-Commands
+## Commands
 
-1.  To deploy an application on the cluster – kubectl run podname - -
-    > image=dockerimagname
+  - To deploy an application on the cluster – `kubectl run podname - -image=dockerimagname`
 
 > This command deploys a docker container by creating a pod, it first
 > creates a pod

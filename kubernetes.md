@@ -2,14 +2,8 @@
 
 ## Commands
 
-  - To deploy an application on the cluster – `kubectl run podname - -image=dockerimagname`
-
-> This command deploys a docker container by creating a pod, it first
-> creates a pod
->
-> automatically and deploys an instance of the docker image. The pod
-> name could be anything, the image name has to be the name of an image
-> available at docker hub or any other container registry.
+  - To deploy an application on the cluster – `kubectl run podname --image=dockerimagname`
+This command deploys a docker container by creating a pod, it first creates a pod automatically and deploys an instance of the docker image. The podname could be anything, the image name has to be the name of an imageavailable at docker hub or any other container registry.
 
 1.  To view information about the cluster - kubectl cluster-info
 

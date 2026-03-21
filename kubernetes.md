@@ -42,33 +42,22 @@ has its own tool called docker swarm.
 orchestrate the deployment and management of hundreds and thousands of
 containers in a clustered environment**.
 
-Architecture
+## K8's Architecture
 
 Setting up of kubernetes cluster, let us start with nodes, A node is a
-machine, physical
-
-or virtual on which kubernetes is installed. A node is a worker machine
-and that is
-
-where containers will be launched by kubernetes. It was also known as
-minions in the
-
-past. If the node on which the application is running fails, obviously
-the application
-
-goes down. So we need to have more than one node. A cluster is a set of
-nodes grouped
-
-together. The master is another node with kubernetes installed and is
-responsible for
-
-taking care of the nodes.
+machine, physical or virtual on which kubernetes is installed. A node is a worker machine
+and that is where containers will be launched by kubernetes. It was also known as
+minions in the past. If the node on which the application is running fails, obviously
+the application goes down. So we need to have more than one node. A cluster is a set of
+nodes grouped together. The master is another node with kubernetes installed and is
+responsible for taking care of the nodes.
 
 <img src="images/media/image1.png" style="width:6.5in;height:3.15278in" />
 
 When we’re installing kubernetes on a system, we’re actually installing
 the following components: an API, etcd service, kubelet, container
-runtime, controller, scheduler.  
+runtime, controller, scheduler. 
+
 **API server** – It acts as the front end for kubernetes , the users,
 management devices, CLI’s all talk to the API server to interact with
 the kubernetes cluster.  
@@ -91,7 +80,7 @@ which we are using as a container runtime engine.
 responsible for making sure that the containers are running on the nodes
 as expected.
 
-**Master vs Worker Nodes**
+## Master vs Worker Nodes
 
 So far, we saw two types of servers: master and worker and a set of
 components that make up K8’s. But how are these components distributed
@@ -120,147 +109,133 @@ that starts the pod with a container inside.
 Kubeproxy forwards the request.  
 The other container runtime engines are RKT and CRI-O
 
-**Kubectl**  
+## Kubectl
+
 Kube command line tool or kubectl or kube control, the kubectl tool is
 used to deploy and manage applications on a kubernetes cluster. To get
 cluster information, to get status of other nodes in the cluster and to
 manage many other things.
 
-**Kubernetes Components**
+## Kubernetes Components
 
-Pod, service, ingress  
-Volumes  
-Secrets, ConfigMap  
-StatefulSet, Deployment
+Pod, service, ingress   
+Volumes   
+Secrets, ConfigMap    
+StatefulSet, Deployment  
 
-> **NODE & POD** - [<span
+**NODE & POD** - [<span
 > class="underline">https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/</span>](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/)
->
-> To deploy the application in the form of containers on a set of
-> machines that are
->
-> configured as worker nodes in a cluster. However kubernetes does not
-> deploy containers
->
-> directly on the worker nodes. The containers are encapsulated into a
-> kubernetes object
->
-> known as pods. A pod is a single instance of an application. A pod is
-> the smallest object
->
-> that you can create in kubernetes.
->
-> **Also, a pod is defined as a layer of abstraction on top of
-> containers and deployment is another abstraction on top of pods.**
->
-> <img src="images/media/image26.jpg" style="width:6.5in;height:3.7251in" alt="C:\Downloads\IMG_1372.jpg" />
->
-> Additional containers cannot be added to an existing pod to scale the
-> application. Pods
->
-> Usually have a one to one relationship with the containers. Each pod
-> gets its own internal IP address that can communicate with other pods
-> in a server. Pod components in kubernetes also generate ports which
-> are ephemeral, which means that they can die very easily. If a pod
-> crashes, then a new pod gets created and a new internal IP address is
-> allocated to the pod, it is not so efficient, so in order to overcome
-> this, we use a component called service.
->
-> <img src="images/media/image36.jpg" style="width:3.33667in;height:1.99951in" alt="C:\Downloads\IMG_2783.jpg" />
->
-> **Ingress & Service**
->
-> Using this, a permanent IP will be allocated to the pod, and the
-> lifecycle of the pod and service is NOT connected. Even if the pod
-> crashes, the IP would remain the same. For the application to be
-> accessible to the browser, we can use another component called
-> ingress, it routes traffic to the kubernetes cluster.
->
-> **Service has got 2 functionalities:**
->
-> Permanent IP  
-> act as an load balancer 🡪 it actually catches the request and forward
-> it to whichever pod is least busy.  
-> <img src="images/media/image34.jpg" style="width:6.5in;height:3.65163in" alt="C:\Downloads\IMG_2784 (1).jpg" />
->
-> **ConfigMap & Secret**
->
-> Here my-app uses the endpoint **mongo-db-service** to interact with
-> the database, usually we configure this end point in the properties
-> file of the application, for suppose if the end point of the service
-> or service name is changed to **mongo –db,** then we would have to
-> adjust that endpoint in the application, so we have to rebuild the
-> application, push it and pull it into the pod doing the entire process
-> again, it’s a tedious task.
->
-> <img src="images/media/image40.jpg" style="width:4.83027in;height:2.71296in" alt="C:\Downloads\IMG_2785.jpg" />
->
-> <img src="images/media/image37.jpg" style="width:4.92258in;height:2.91212in" alt="C:\Downloads\IMG_2787.jpg" />
->
-> To avoid this, kubernetes has a component called config map, it’s
-> basically the external configuration to the application, usually
-> contains configuration data like urls of a database or some other
-> services that you use and in kubernetes you just connect it to the pod
-> so that the pod actually gets the data the configmap contains, if the
-> name of the service is changed, the endpoint gets adjusted based on
-> the config map.
->
-> The part of the external configuration can also be database username
-> and password , which may also change in the application deployment
-> process, so putting these credentials in the external configuration
-> file is insecure, for this, kubernetes has another component called
-> **secret,** it stores data in **base64 encoded format.**
->
-> We can use the data in configMap or secret using the environment
-> variables or as a properties file.
->
-> **Volumes**
->
-> This component is used to store data and log of the kubernetes pods,
-> without this, when the pods are turned off or gets crashed all of a
-> sudden, all the data will be lost, to avoid this we use volumes.
->
-> Think of a storage as an external hard drive plugged into the
-> kubernetes cluster, because the kubernetes cluster explicitly doesn’t
-> manage any data persistence, so it is the responsibility of the user
-> or the administrator to back up the data.
->
-> <img src="images/media/image44.jpg" style="width:4.95466in;height:2.98042in" alt="C:\Downloads\IMG_2788.jpg" />
->
-> **Deployment**
->
-> So in order to make the application available all time, we use replica
-> sets. Inorder to create the replica of the pod, there is no need to
-> create a 2<sup>nd</sup> pod, but instead we would define a blueprint
-> for the particular pod and specify how many replicas of that pod we
-> need to run, that component or that blueprint is called deployment, in
-> real we won’t create pods, instead we create deployments, because
-> there we can specify how many replicas we need.
->
-> **Also, a pod is defined as a layer of abstraction on top of
-> containers and deployment is another abstraction on top of pods**.
->
-> The application can be replicated using deployment, but **DATABASE**
-> can’t be replicated using deployment, because DB has a state which is
-> its data, meaning that if we have clones or replicas of the DB they
-> would all need to access the same shared data storage and there we
-> would need some of mechanism that manages which pods are currently
-> writing to that storage or which pods are reading from the storage in
-> order to avoid data inconsistencies and that mechanism in addition to
-> replicating feature is offered by another kubernetes component called
-> **statefulset**.
->
-> In contrast, a stateful application saves data about each client
-> session and uses that data the next time the client makes a request.
-> When an application is stateless, the server does not store any state
-> about the client session. Instead, the session data is stored on the
-> client and passed to the server as needed.
->
-> Note: Deployment for stateless Apps and statefulset for stateful apps
-> or databases. It is a bit difficult to deploy stateful inside a single
-> node, so it is a common practice to host DB outside of K8s cluster.
->
-> **PODS**
+
+To deploy the application in the form of containers on a set ofmachines that are
+configured as worker nodes in a cluster. However kubernetes does not deploy containers
+directly on the worker nodes. The containers are encapsulated into a kubernetes object
+known as pods. A pod is a single instance of an application. A pod is the smallest object
+that you can create in kubernetes.
+
+**Also, a pod is defined as a layer of abstraction on top of
+containers and deployment is another abstraction on top of pods.**
+
+<img src="images/media/image26.jpg" style="width:6.5in;height:3.7251in" alt="C:\Downloads\IMG_1372.jpg" />
+
+Additional containers cannot be added to an existing pod to scale the
+application. Pods usually have a one to one relationship with the containers. Each pod
+gets its own internal IP address that can communicate with other pods
+in a server. Pod components in kubernetes also generate ports which
+are ephemeral, which means that they can die very easily. If a pod
+crashes, then a new pod gets created and a new internal IP address is
+allocated to the pod, it is not so efficient, so in order to overcome this, we use a component called service.
+
+<img src="images/media/image36.jpg" style="width:3.33667in;height:1.99951in" alt="C:\Downloads\IMG_2783.jpg" />
+
+## Ingress & Service
+
+Using this, a permanent IP will be allocated to the pod, and the
+lifecycle of the pod and service is NOT connected. Even if the pod
+crashes, the IP would remain the same. For the application to be
+accessible to the browser, we can use another component called
+ingress, it routes traffic to the kubernetes cluster.
+
+## Service has got 2 functionalities:
+
+  - Permanent IP  
+  - Act as an load balancer 🡪 it actually catches the request and forward it to whichever pod is least busy.  
+<img src="images/media/image34.jpg" style="width:6.5in;height:3.65163in" alt="C:\Downloads\IMG_2784 (1).jpg" />
+
+## ConfigMap & Secret
+
+Here my-app uses the endpoint **mongo-db-service** to interact with
+the database, usually we configure this end point in the properties
+file of the application, for suppose if the end point of the service
+or service name is changed to **mongo –db,** then we would have to
+adjust that endpoint in the application, so we have to rebuild the
+application, push it and pull it into the pod doing the entire process
+again, it’s a tedious task.
+
+<img src="images/media/image40.jpg" style="width:4.83027in;height:2.71296in" alt="C:\Downloads\IMG_2785.jpg" />
+
+<img src="images/media/image37.jpg" style="width:4.92258in;height:2.91212in" alt="C:\Downloads\IMG_2787.jpg" />
+
+To avoid this, kubernetes has a component called config map, it’s
+basically the external configuration to the application, usually
+contains configuration data like urls of a database or some other
+services that you use and in kubernetes you just connect it to the pod
+so that the pod actually gets the data the configmap contains, if the
+name of the service is changed, the endpoint gets adjusted based on
+the config map.
+
+The part of the external configuration can also be database username
+and password , which may also change in the application deployment
+ process, so putting these credentials in the external configuration
+file is insecure, for this, kubernetes has another component called
+**secret,** it stores data in **base64 encoded format.**
+
+We can use the data in configMap or secret using the environment
+variables or as a properties file.
+
+## Volumes
+
+This component is used to store data and log of the kubernetes pods,
+without this, when the pods are turned off or gets crashed all of a
+sudden, all the data will be lost, to avoid this we use volumes.
+
+Think of a storage as an external hard drive plugged into the
+kubernetes cluster, because the kubernetes cluster explicitly doesn’t
+manage any data persistence, so it is the responsibility of the user
+or the administrator to back up the data.
+
+<img src="images/media/image44.jpg" style="width:4.95466in;height:2.98042in" alt="C:\Downloads\IMG_2788.jpg" />
+
+## Deployment
+
+So in order to make the application available all time, we use replica
+sets. Inorder to create the replica of the pod, there is no need to
+create a 2<sup>nd</sup> pod, but instead we would define a blueprint
+for the particular pod and specify how many replicas of that pod we
+need to run, that component or that blueprint is called deployment, in
+real we won’t create pods, instead we create deployments, because
+there we can specify how many replicas we need.
+
+The application can be replicated using deployment, but **DATABASE**
+can’t be replicated using deployment, because DB has a state which is
+its data, meaning that if we have clones or replicas of the DB they
+would all need to access the same shared data storage and there we
+would need some of mechanism that manages which pods are currently
+writing to that storage or which pods are reading from the storage in
+order to avoid data inconsistencies and that mechanism in addition to
+replicating feature is offered by another kubernetes component called
+**statefulset**.
+
+In contrast, a stateful application saves data about each client
+session and uses that data the next time the client makes a request.
+When an application is stateless, the server does not store any state
+about the client session. Instead, the session data is stored on the
+client and passed to the server as needed.
+
+Note: Deployment for stateless Apps and statefulset for stateful apps
+or databases. It is a bit difficult to deploy stateful inside a single
+node, so it is a common practice to host DB outside of K8s cluster.
+
+## PODS
 
 Kubernetes does not deploy containers directly on the node machines,
 instead the containers are encapsulated into a kubernetes object known
@@ -280,74 +255,57 @@ We can this configuration in settings.json in VSC to get K8’s yaml’s
 
 <img src="images/media/image23.png" style="width:6.5in;height:2.65278in" />
 
-1.  **YAML in kubernetes**
+## YAML in kubernetes
 
-> Kubernetes uses YAML files as inputs for creation of objects such as
-> POD’s, replicas,
->
-> deployment services etc. all of these follow structure, kubernetes
-> definition file always
->
-> contains 4 top level fields.  
-> **Kind:** It refers to the type of object we’re trying to create.  
-> **Metadata:** The metadata is data about the object like its name
-> labels etc.  
-> **Label:** Say for example there are hundreds of pods running a front
-> end application and hundreds of running a backend application or a
-> database, it will be difficult for you to group these pods once
-> they’re deployed. If we label them as frontend, backend or a database
-> then we will be able to filter the pods.  
-> **Spec:**  
-> **Containers:** This is a list, because the pods can have multiple
-> containers within them.
->
-> <img src="images/media/image42.jpg" style="width:6.07619in;height:3.67745in" alt="C:\Downloads\IMG_1379.jpg" />
+Kubernetes uses YAML files as inputs for creation of objects such as
+POD’s, replicas, deployment services etc. all of these follow structure, kubernetes
+definition file always contains 4 top level fields.  
+ 
+ ```bash
+**Kind:** It refers to the type of object we’re trying to create.  
+**Metadata:** The metadata is data about the object like its name labels etc.  
+**Label:** Say for example there are hundreds of pods running a front end application and hundreds of running a backend application or a database, it will be difficult for you to group these pods once they’re deployed. If we label them as frontend, backend or a database then we will be able to filter the pods.  
+**Spec:**  
+  **Containers:** This is a list, because the pods can have multiple containers within them.
+```
 
-1.  Developing kubernetes manifest files with IDE (Integrated
-    > development environment)
+<img src="images/media/image42.jpg" style="width:6.07619in;height:3.67745in" alt="C:\Downloads\IMG_1379.jpg" />
 
-> Kubernetes schemas – the term is often used to refer to a graphical
-> depiction of the database
->
-> structure. In other words, schema is the structure of the database
-> that defines the objects in the
->
-> database.
+**Kubernetes schemas** – the term is often used to refer to a graphical depiction of the database
+structure. In other words, schema is the structure of the database that defines the objects in the database.
 
-1.  **Replication controllers and replica sets**
+## Replication controllers and replica sets
 
-> Controllers are the brains behind kubernetes, they are the processes
-> that monitors kubernetes
->
-> objects and respond accordingly. The replication controller helps run
-> multiple instances of a
->
-> single pod in the kubernetes cluster, thus providing a high
-> availability. Even if we have a single pod, the replication controller
-> can help by automatically bringing up a new pod when the existing one
-> fails. The replication controller ensures that the specified number of
-> pods are running at all times, another reason we need a replication
-> controller is to create multiple pods to share the load across them.
-> The replication controller spans across multiple nodes in the cluster.
-> There are similar terms replication controller and replica set, both
-> have the same purpose, but they are not the same. Replication
-> controller is the older technology that is being replaced by replica
-> sets. Replica set is the new recommended way to set up replication.
+Controllers are the brains behind kubernetes, they are the processes that monitors kubernetes
+objects and respond accordingly. The replication controller helps run multiple instances of a
+single pod in the kubernetes cluster, thus providing a high
+availability. Even if we have a single pod, the replication controller
+can help by automatically bringing up a new pod when the existing one
+fails. The replication controller ensures that the specified number of
+pods are running at all times, another reason we need a replication
+controller is to create multiple pods to share the load across them.
+The replication controller spans across multiple nodes in the cluster.
+There are similar terms replication controller and replica set, both
+have the same purpose, but they are not the same. Replication
+controller is the older technology that is being replaced by replica
+sets. Replica set is the new recommended way to set up replication.
 
 **To create a replication controller**:  
+
 We start with creating a replication controller definition file, we will
 name it as rc-definition.yml.  
 For any kubernetes definition file, the spec section defines what’s
 inside the object we are creating.
 
-**Replication controller  
-Note:** For any kubernetes definition file, the spec section defines
-what’s inside the object we are creating  
-replication controller creates multiple instances of a pod, but what
-pod, we create a template  
-section under spec to provide a pod template to be used by the
-replication controller to create  
-replicas.
+### Replication controller  
+
+In a Kubernetes definition file, the `spec` section defines the desired state of the object.
+
+A ReplicationController is used to create and maintain multiple replicas of a Pod.
+
+To define which Pod should be created, a `template` section is specified under `spec`. 
+This template contains the Pod definition, which is used by the ReplicationController 
+to create and manage multiple identical Pod replicas.
 
 <img src="images/media/image32.png" style="width:6.5in;height:4.04167in" />
 
@@ -361,7 +319,7 @@ replicas.
 
 <img src="images/media/image41.png" style="width:6.5in;height:3.72222in" />
 
-**Replication set**
+## Replication set
 
 It is very similar to a replication controller. There is one major
 difference between replication controller and replica set, the replica
@@ -402,7 +360,7 @@ pods to monitor.
 
 <img src="images/media/image4.png" style="width:6.50982in;height:3.45313in" />
 
-**Scale of ReplicaSets -  
+**Scale of ReplicaSets** -  
   
 **There are multiple ways to scale a ReplicaSet. One way is to edit the
 replicaset-definition.yml file and modify the replicas field. Another
@@ -412,7 +370,7 @@ the changes will not be updated in the replicaset-definition.yml file.
 
 <img src="images/media/image13.png" style="width:6.5in;height:3.375in" />
 
-**Deployments**
+## Deployments
 
 If the application needs to be updated with the newer version, which is
 deployed on many docker instances, it should be done one at a time
@@ -505,7 +463,7 @@ back to its older format.
 
 <img src="images/media/image14.png" style="width:6.5in;height:4.13889in" />
 
-**Networking**
+## Networking
 
 We will start with a single node K8’s cluster. The node has an IP
 address, say it is 192.168.1.2. In this case, this is the IP address we
@@ -532,16 +490,16 @@ recreated.
 
 <img src="images/media/image7.png" style="width:6.5in;height:3.88889in" />
 
-1.  Kubernetes services
+## Kubernetes services
 
-> Services-node port
->
-> Kubernetes services enable communication between various components
-> within and outside of the application, this service helps us connect
-> applications together with other applications or users. A service is
-> only required if the application has some kind of process or database
-> service or web service that needs to be exposed, that needs to be
-> accessed by others.
+**Services-node port**
+
+Kubernetes services enable communication between various components
+within and outside of the application, this service helps us connect
+applications together with other applications or users. A service is
+only required if the application has some kind of process or database
+service or web service that needs to be exposed, that needs to be
+accessed by others.
 
 <img src="images/media/image6.png" style="width:6.5in;height:4.31944in" />
 
@@ -551,10 +509,10 @@ groups for running backend processes, and a third group connecting to an
 external data source. It is a service that enables connectivity between
 these groups of pods.
 
-> Kubernetes service is an object just like pod, replica set, and
-> deployments. One use case of services is to listen to a port on the
-> node and forward requests on that port to a port running the web
-> application. This type of service is known as node port service.
+Kubernetes service is an object just like pod, replica set, and
+deployments. One use case of services is to listen to a port on the
+node and forward requests on that port to a port running the web
+application. This type of service is known as node port service.
 
 Let’s look at the below setup, the kubernetes node has an IP address,
 i.e., 192.168.1.2, and the laptop is on the same network as well, so it
@@ -589,13 +547,13 @@ There are other kinds of services available -
 1.  Node port
 
 2.  Cluster IP → In this case, the service creates a virtual IP inside
-    > the cluster to enable communication between different services,
-    > such as a set of front-end servers to a set of backend servers.
+    the cluster to enable communication between different services,
+    such as a set of front-end servers to a set of backend servers.
 
 3.  Load balancer → In this case, it provisions a load balancer for our
-    > application in supported cloud providers. A good example of that
-    > would be to distribute load across the different web servers in
-    > the front-end tier.
+    application in supported cloud providers. A good example of that
+    would be to distribute load across the different web servers in
+    the front-end tier.
 
 <img src="images/media/image28.png" style="width:6.5in;height:3.02778in" />
 

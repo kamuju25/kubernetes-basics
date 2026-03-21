@@ -1,186 +1,16 @@
 # KUBERNETES
 
-## Commands
+It is an open source container orchestration tool, it was developed by google. It helps in managing containerized applications which are deployed in different environments.
 
-  - To deploy an application on the cluster – `kubectl run podname --image=dockerimagname`
-This command deploys a docker container by creating a pod, it first creates a pod automatically and deploys an instance of the docker image. The podname could be anything, the image name has to be the name of an imageavailable at docker hub or any other container registry.
+## Problems & Tasks of an container orchestration tool
 
-1.  To view information about the cluster - kubectl cluster-info
+The rise of micro services increased usage of container technologies because the containers actually offer the perfect host for small independent applications like microservices. The rise of containers and the micro service technology actually resulted in applications that now consist of hundreds or sometimes maybe even thousands of containers, now managing those loads of containers across multiple environments using scripts and self made tools can be really complex. Such a specific scenario actually caused the need for having container orchestration technologies.
 
-2.  To list all the nodes, part of the cluster – kubectl get nodes.
+## Features orchestration tool offer
 
-3.  To list the pods in the cluster – kubectl get pods
-
-4.  To get more information about the pod – kubectl describe pod podname
-    > (ex:nginx)  
-    > It gives more information than the kubectl get command.
-
-5.  To check the status of the pod – kubectl get pods –o wide
-
-6.  To check in which pods the nodes placed on - kubectl get pods –o
-    > wide
-
-7.  To know the OS on which the Kubernetes nodes are running- kubectl
-    > get nodes –o wide
-
-8.  To run the kubernetes yml script- kubectl apply (or create) –f
-    > scriptname.yml  
-    > Example: kubectl create –f pod-definition.yml
-
-9.  To know the kubernetes version – kubectl version
-
-10. To delete the pod – kubectl delete pod podname
-
-11. To create new pod with the name redis and with the image redis123:
-
-> kubectl run redis --image=redis123 --dry-run=client -o yaml &gt;
-> redis-definition.yaml
->
-> kubectl create -f redis-definition.yaml
->
-> REPLICASET
-
-1.  To update or edit the image of the pod – kubectl edit pod redis
-
-2.  To list the number of replica sets on the system – kubectl get
-    > replicaset or kubectl get rs
-
-3.  To update or edit the replica set – kubectl edit replicaset rsname
-
-4.  After the modifing the file, to increase the replicas –  
-    > kubectl replace –f replicaset-definition.yml
-
-5.  To scale up the replicas using command –  
-    > kubectl scale -replicas=x(number of replicas) –f
-    > replicaset-definition.yml
-
-6.  To create replica set – kubectl create –f replicaset-definition.yml
-    > name
-
-7.  To delete the replica set – kubectl delete replicaset replicasetname
-    > (Also deletes pods in it)
-
-8.  To run the updated replicaset file – kubectl replace –f
-    > replicaset-definition.yml name
-
-9.  To list the number of deployments – kubectl get deploy
-
-10. To list the services – kubectl get services
-
-11. To get the target port configured on the service – kubectl describe
-    > service
-
-12. To see all the created objects at once – kubectl get all
-
-13. To list more info about deployments – kubectl describe deployment
-    > deploymentfilename
-
-14. To check the rollout status – kubectl rollout status
-    > deployment/deploymentname
-
-15. To check the history of deployment – kubectl rollout history
-    > deployment/deploymentname
-
-16. To roll back the deployment – kubectl rollout undo
-    > deployment/deploymentname.
-
-17. To create the deploment – kubectl create -f deployment
-    > definition.yml
-
-18. To list the deployments – kubectl get deployments
-
-19. To update the deployment – kubectl apply –f
-    > deployment-definition.yml (or) using image -
-
-> Kubectl set image deployment/deploymentname old=new(ex:
-> nginx-nginx:1.9.1)
->
-> Using the image command the configuration also changes.
-
-1.  To record the cause of change – kubectl create –f deployment.yaml -
-    > - record
-
-2.  To edit the deployment – kubectl edit deployment deploymentname - -
-    > record
-
-3.  To know the deployment – kubectl get deployment deploymentname
-
-4.  To run the script – scriptname run (example- /root/curl-test.sh run)
-
-5.  To get pods and services together – kubectl get pods, svc
-
-6.  To scale up the deployments – kubectl scale deployment
-    > deploymentname - - replicas=3
-
-7.  To get short names for features on kubernetes - kubectl
-    > api-resources
-
-8.  The command is used to list deployments across all namespaces in a
-    > Kubernetes cluster –
-
-> kubectl get deployments -A
-
-1.  To get the labels attached to the pod - kubectl get pods
-    > --show-labels
-
-2.  To create a template creation using the index.html file or any
-    > other - kubectl create deployment nginx --image=nginx
-    > --dry-run=client -o=yaml &gt; deployment.yaml
-
-3.  When you store secret in a file(in k8s), and you want to convert it
-    > to base64, always use -n in echo command, or else it will generate
-    > space at the end of the secret stored in a file →
-
-> echo -n $string | base64
-
-1.  To get nodes memory - kubectl top nodes
-
-2.  To get pods memory- kubectl top pods
-
-3.  To create a Kubernetes pod with resource limits (CPU and memory)
-    > using the imperative method, use the kubectl run command with
-    > --dry-run=client to generate a YAML template, edit it to include
-    > limits, and apply it -
-
-> kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml
-> &gt; pod.yaml
-
-1.  To create a deployment using imperative method to generate a
-    > manifest file -
-
-> kubectl create deployment nginx \\
->
-> --image=nginx \\
->
-> --replicas=3 \\
->
-> --dry-run=client \\
->
-> -o yaml &gt; deployment.yaml
-
-**Kubernetes**
-
-It is an open source container orchestration tool, it was developed by
-google. It helps in managing containerized applications which are
-deployed in different environments.
-
-**Problems & Tasks of an container orchestration tool**
-
-The rise of micro services increased usage of container technologies
-because the containers actually offer the perfect host for small
-independent applications like microservices. The rise of containers and
-the micro service technology actually resulted in applications that now
-consist of hundreds or sometimes maybe even thousands of containers, now
-managing those loads of containers across multiple environments using
-scripts and self made tools can be really complex. Such a specific
-scenario actually caused the need for having container orchestration
-technologies.
-
-**Features orchestration tool offer**
-
-High availability or no down time.  
-Scalability or high performance.  
-Disaster recovery – backup and restore.
+  - High availability or no down time.   
+  - Scalability or high performance.   
+  - Disaster recovery – backup and restore.  
 
 <img src="images/media/image29.jpg" style="width:6.5in;height:3.82846in" alt="C:\Downloads\IMG_1438.jpg" />
 
@@ -188,26 +18,14 @@ Disaster recovery – backup and restore.
 
 <img src="images/media/image30.jpg" style="width:6.5in;height:4.00731in" alt="C:\Downloads\IMG_1440.jpg" />
 
-Container + orchestration
+## Container + orchestration
 
-Containers are completely isolated environments, as in they can have
-their own processes or services, their own networking interfaces, their
-own mounts just like VM’s. Except they all share the same OS kernel.
-Some of the different types of containers are LXC, LXD, LXCFS, docker
-utilizes LXC containers.  
-Unlike Hypervisors docker is not meant to virtualize and run different
-operating systems and kernels on the same hardware.  
-The main purpose of docker is to containerize applications and to ship
-them and run them.  
-Containers are running instances of images that are isolated and have
-their own environments and set of processes.
+Containers are completely isolated environments, as in they can have their own processes or services, their own networking interfaces, their own mounts just like VM’s. Except they all share the same OS kernel. Some of the different types of containers are LXC, LXD, LXCFS, docker utilizes LXC containers. Unlike Hypervisors docker is not meant to virtualize and run different operating systems and kernels on the same hardware. The main purpose of docker is to containerize applications and to ship
+them and run them. Containers are running instances of images that are isolated and have their own environments and set of processes.
 
 <img src="images/media/image31.jpg" style="width:6.5in;height:3.81047in" alt="C:\Downloads\IMG_1369.jpg" />
 
-**Container orchestration**
-
-For suppose, let’s assume our application is packaged into a docker
-container, when it is running in production, What if your application
+For suppose, let’s assume our application is packaged into a docker container, when it is running in production, What if your application
 relies on other containers such as databases or messaging services or
 other backend services. What if the number of users increases and you
 need to scale your application? How do you scale down when the load
@@ -863,3 +681,57 @@ for our application in supported cloud providers.
 > [<span
 > class="underline">https://www.mirantis.com/cloud-native-concepts/getting-started-with-kubernetes/what-is-kubernetes-management/?utm\_source=google&utm\_medium=paidsearch&utm\_campaign=15835777586&utm\_adgroup=132106624541&utm\_content=598619916421&utm\_term=kubernetes%20engine%20cluster&utm\_region=america&utm\_focus=non-brand&gclid=Cj0KCQjwlK-WBhDjARIsAO2sErQz4FvDtAgpRWt4ej37mQg697nngebh8Qf7lPLvO3hXnfRZGDdEWmcaAqibEALw\_wcB</span>](https://www.mirantis.com/cloud-native-concepts/getting-started-with-kubernetes/what-is-kubernetes-management/?utm_source=google&utm_medium=paidsearch&utm_campaign=15835777586&utm_adgroup=132106624541&utm_content=598619916421&utm_term=kubernetes%20engine%20cluster&utm_region=america&utm_focus=non-brand&gclid=Cj0KCQjwlK-WBhDjARIsAO2sErQz4FvDtAgpRWt4ej37mQg697nngebh8Qf7lPLvO3hXnfRZGDdEWmcaAqibEALw_wcB)
 > 🡪 Kubernetes cluster
+
+## Commands
+
+  - To create and run a single Pod in the Kubernetes cluster – `kubectl run podname --image=dockerimagname`
+  - To view information about the cluster - `kubectl cluster-info`
+  - To list all the nodes, part of the cluster – `kubectl get nodes`
+  - To list the pods in the cluster – `kubectl get pods`
+  - To get more information about the pod – `kubectl describe pod <podname>`
+  - To check the status of the pod – `kubectl get pods –o wide`
+  - To check in which pods the nodes placed on - `kubectl get pods –o wide`
+  - To know the OS on which the Kubernetes nodes are running- `kubectl get nodes –o wide`
+  - To run the kubernetes yml script- `kubectl apply (or create) –f <scriptname.yml>` 
+  - To know the kubernetes version – `kubectl version`
+  - To delete the pod – `kubectl delete pod podname`
+  - To update or edit the image of the pod – kubectl edit pod redis
+  - To list the number of replica sets on the system – kubectl get replicaset or kubectl get rs
+  - To update or edit the replica set – kubectl edit replicaset rsname
+  - After the modifing the file, to increase the replicas – kubectl replace –f replicaset-definition.yml
+  - To scale up the replicas using command – kubectl scale -replicas=x(number of replicas) –f replicaset-definition.yml
+  - To create a replica set – kubectl create –f replicaset-definition.yml
+  - To delete the replica set – kubectl delete replicaset replicasetname (Also deletes pods in it)
+  - To run the updated replicaset file – kubectl replace –f replicaset-definition.yml name
+  - To list the number of deployments – kubectl get deploy
+  - To list the services – kubectl get services
+  - To get the target port configured on the service – kubectl describe service
+  - To see all the created objects at once – kubectl get all
+  - To list more info about deployments – kubectl describe deployment deploymentfilename
+  - To check the rollout status – kubectl rollout status deployment/deploymentname
+  - To check the history of deployment – kubectl rollout history deployment/deploymentname
+  - To roll back the deployment – kubectl rollout undo deployment/deploymentname.
+  - To create the deploment – kubectl create -f deployment definition.yml
+  - To list the deployments – kubectl get deployments
+  - To update the deployment – kubectl apply –f deployment-definition.yml (or) using image - Kubectl set image deployment/deploymentname old=new(ex:nginx-nginx:1.9.1) Using the image command the configuration also changes.
+  - To record the cause of change – kubectl create –f deployment.yaml -- record
+  - To edit the deployment – kubectl edit deployment deploymentname --record
+  - To know the deployment – kubectl get deployment deploymentname
+  - To run the script – scriptname run (example- /root/curl-test.sh run)
+  - To get pods and services together – kubectl get pods, svc
+  - To scale up the deployments – kubectl scale deployment deploymentname - - replicas=3
+  - To get short names for features on kubernetes - kubectl api-resources
+  - To list deployments across all namespaces in a Kubernetes cluster – kubectl get deployments -A
+  - To get the labels attached to the pod - kubectl get pods --show-labels
+  - To create a template creation using the index.html file or any other - kubectl create deployment nginx --image=nginx --dry-run=client -o=yaml &gt; deployment.yaml
+  - When you store secret in a file(in k8s), and you want to convert it to base64, always use -n in echo command, or else it will generate space at the end of the secret stored in a file → echo -n $string | base64
+  - To get nodes memory - kubectl top nodes
+  - To get pods memory- kubectl top pods
+  - To create a Kubernetes pod with resource limits (CPU and memory) using the imperative method, use the kubectl run command with --dry-run=client to generate a YAML template, edit it to include limits, and apply it -
+kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml &gt; pod.yaml
+  - To create a deployment using imperative method to generate a manifest file -
+     kubectl create deployment nginx \\  
+     --image=nginx \\  
+     --replicas=3 \\  
+     --dry-run=client \\  
+     -o yaml &gt; deployment.yaml 

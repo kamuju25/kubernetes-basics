@@ -1,8 +1,8 @@
-# KUBERNETES
+KUBERNETES
 
-## K8's Commands
+Commands
 
-  - To deploy an application on the cluster – kubectl run podname - -
+1.  To deploy an application on the cluster – kubectl run podname - -
     > image=dockerimagname
 
 > This command deploys a docker container by creating a pod, it first
@@ -189,11 +189,11 @@ High availability or no down time.
 Scalability or high performance.  
 Disaster recovery – backup and restore.
 
-<img src="./kubernetes-basics/images/media/image29.jpg" style="width:6.5in;height:3.82846in" alt="C:\Downloads\IMG_1438.jpg" />
+<img src="images/media/image29.jpg" style="width:6.5in;height:3.82846in" alt="C:\Downloads\IMG_1438.jpg" />
 
-<img src="./kubernetes-basics/images/media/image33.jpg" style="width:6.5in;height:4.08352in" alt="C:\Downloads\IMG_1439.jpg" />
+<img src="images/media/image33.jpg" style="width:6.5in;height:4.08352in" alt="C:\Downloads\IMG_1439.jpg" />
 
-<img src="./kubernetes-basics/images/media/image30.jpg" style="width:6.5in;height:4.00731in" alt="C:\Downloads\IMG_1440.jpg" />
+<img src="images/media/image30.jpg" style="width:6.5in;height:4.00731in" alt="C:\Downloads\IMG_1440.jpg" />
 
 Container + orchestration
 
@@ -209,7 +209,7 @@ them and run them.
 Containers are running instances of images that are isolated and have
 their own environments and set of processes.
 
-<img src="./kubernetes-basics/images/media/image31.jpg" style="width:6.5in;height:3.81047in" alt="C:\Downloads\IMG_1369.jpg" />
+<img src="images/media/image31.jpg" style="width:6.5in;height:3.81047in" alt="C:\Downloads\IMG_1369.jpg" />
 
 **Container orchestration**
 
@@ -253,7 +253,7 @@ responsible for
 
 taking care of the nodes.
 
-<img src="./kubernetes-basics/images/media/image1.png" style="width:6.5in;height:3.15278in" />
+<img src="images/media/image1.png" style="width:6.5in;height:3.15278in" />
 
 When we’re installing kubernetes on a system, we’re actually installing
 the following components: an API, etcd service, kubelet, container
@@ -292,7 +292,7 @@ runtime falls, in this case, it happens to be ContainerD. This doesn’t
 have to be ContainerD, there are other container runtime alternatives
 available such as **rkt** or **CRI-O**
 
-<img src="./kubernetes-basics/images/media/image9.png" style="width:6.5in;height:3.26389in" />
+<img src="images/media/image9.png" style="width:6.5in;height:3.26389in" />
 
 The master server has the kube API server and that is what makes it a
 master, similarly, the worker nodes have the kubelet agent that is
@@ -342,7 +342,7 @@ StatefulSet, Deployment
 > **Also, a pod is defined as a layer of abstraction on top of
 > containers and deployment is another abstraction on top of pods.**
 >
-> <img src="./kubernetes-basics/images/media/image26.jpg" style="width:6.5in;height:3.7251in" alt="C:\Downloads\IMG_1372.jpg" />
+> <img src="images/media/image26.jpg" style="width:6.5in;height:3.7251in" alt="C:\Downloads\IMG_1372.jpg" />
 >
 > Additional containers cannot be added to an existing pod to scale the
 > application. Pods
@@ -355,7 +355,7 @@ StatefulSet, Deployment
 > allocated to the pod, it is not so efficient, so in order to overcome
 > this, we use a component called service.
 >
-> <img src="./kubernetes-basics/images/media/image36.jpg" style="width:3.33667in;height:1.99951in" alt="C:\Downloads\IMG_2783.jpg" />
+> <img src="images/media/image36.jpg" style="width:3.33667in;height:1.99951in" alt="C:\Downloads\IMG_2783.jpg" />
 >
 > **Ingress & Service**
 >
@@ -370,7 +370,7 @@ StatefulSet, Deployment
 > Permanent IP  
 > act as an load balancer 🡪 it actually catches the request and forward
 > it to whichever pod is least busy.  
-> <img src="./kubernetes-basics/images/media/image34.jpg" style="width:6.5in;height:3.65163in" alt="C:\Downloads\IMG_2784 (1).jpg" />
+> <img src="images/media/image34.jpg" style="width:6.5in;height:3.65163in" alt="C:\Downloads\IMG_2784 (1).jpg" />
 >
 > **ConfigMap & Secret**
 >
@@ -382,9 +382,9 @@ StatefulSet, Deployment
 > application, push it and pull it into the pod doing the entire process
 > again, it’s a tedious task.
 >
-> <img src="./kubernetes-basics/images/media/image40.jpg" style="width:4.83027in;height:2.71296in" alt="C:\Downloads\IMG_2785.jpg" />
+> <img src="images/media/image40.jpg" style="width:4.83027in;height:2.71296in" alt="C:\Downloads\IMG_2785.jpg" />
 >
-> <img src="./kubernetes-basics/images/media/image37.jpg" style="width:4.92258in;height:2.91212in" alt="C:\Downloads\IMG_2787.jpg" />
+> <img src="images/media/image37.jpg" style="width:4.92258in;height:2.91212in" alt="C:\Downloads\IMG_2787.jpg" />
 >
 > To avoid this, kubernetes has a component called config map, it’s
 > basically the external configuration to the application, usually
@@ -414,7 +414,7 @@ StatefulSet, Deployment
 > manage any data persistence, so it is the responsibility of the user
 > or the administrator to back up the data.
 >
-> <img src="./kubernetes-basics/images/media/image44.jpg" style="width:4.95466in;height:2.98042in" alt="C:\Downloads\IMG_2788.jpg" />
+> <img src="images/media/image44.jpg" style="width:4.95466in;height:2.98042in" alt="C:\Downloads\IMG_2788.jpg" />
 >
 > **Deployment**
 >
@@ -467,7 +467,7 @@ pod.
 
 We can this configuration in settings.json in VSC to get K8’s yaml’s
 
-<img src="./kubernetes-basics/images/media/image23.png" style="width:6.5in;height:2.65278in" />
+<img src="images/media/image23.png" style="width:6.5in;height:2.65278in" />
 
 1.  **YAML in kubernetes**
 
@@ -490,7 +490,7 @@ We can this configuration in settings.json in VSC to get K8’s yaml’s
 > **Containers:** This is a list, because the pods can have multiple
 > containers within them.
 >
-> <img src="./kubernetes-basics/images/media/image42.jpg" style="width:6.07619in;height:3.67745in" alt="C:\Downloads\IMG_1379.jpg" />
+> <img src="images/media/image42.jpg" style="width:6.07619in;height:3.67745in" alt="C:\Downloads\IMG_1379.jpg" />
 
 1.  Developing kubernetes manifest files with IDE (Integrated
     > development environment)
@@ -538,17 +538,17 @@ section under spec to provide a pod template to be used by the
 replication controller to create  
 replicas.
 
-<img src="./kubernetes-basics/images/media/image32.png" style="width:6.5in;height:4.04167in" />
+<img src="images/media/image32.png" style="width:6.5in;height:4.04167in" />
 
-<img src="./kubernetes-basics/images/media/image10.png" style="width:6.5in;height:3.30556in" />
+<img src="images/media/image10.png" style="width:6.5in;height:3.30556in" />
 
-<img src="./kubernetes-basics/images/media/image15.png" style="width:6.5in;height:7.02778in" />
+<img src="images/media/image15.png" style="width:6.5in;height:7.02778in" />
 
-<img src="./kubernetes-basics/images/media/image11.png" style="width:6.5in;height:6.68056in" />
+<img src="images/media/image11.png" style="width:6.5in;height:6.68056in" />
 
-<img src="./kubernetes-basics/images/media/image25.png" style="width:6.5in;height:6.70833in" />
+<img src="images/media/image25.png" style="width:6.5in;height:6.70833in" />
 
-<img src="./kubernetes-basics/images/media/image41.png" style="width:6.5in;height:3.72222in" />
+<img src="images/media/image41.png" style="width:6.5in;height:3.72222in" />
 
 **Replication set**
 
@@ -575,7 +575,7 @@ specified under it to the labels of the Pods. The ReplicaSet selector
 also provides many other options for matching Labels that were not
 available in a Replication Controller.
 
-<img src="./kubernetes-basics/images/media/image39.png" style="width:6.5in;height:3.59896in" />**Labels
+<img src="images/media/image39.png" style="width:6.5in;height:3.59896in" />**Labels
 and selectors**
 
 Why do we label the pods and objects in kubernetes? The role of the
@@ -589,7 +589,7 @@ section, we use the match labels filter and provide the same label that
 we used while creating the pods. This way, the replica set knows which
 pods to monitor.
 
-<img src="./kubernetes-basics/images/media/image4.png" style="width:6.50982in;height:3.45313in" />
+<img src="images/media/image4.png" style="width:6.50982in;height:3.45313in" />
 
 **Scale of ReplicaSets -  
   
@@ -599,7 +599,7 @@ way is to use the kubectl command, as shown in the image below. However,
 replicas increased using the kubectl command will not be permanent, as
 the changes will not be updated in the replicaset-definition.yml file.
 
-<img src="./kubernetes-basics/images/media/image13.png" style="width:6.5in;height:3.375in" />
+<img src="images/media/image13.png" style="width:6.5in;height:3.375in" />
 
 **Deployments**
 
@@ -627,11 +627,11 @@ deployment provides us with the capability to upgrade the underlying
 instances seamlessly using rolling updates, undo changes pause and
 resume changes as required.
 
-<img src="./kubernetes-basics/images/media/image8.png" style="width:6.5in;height:4.47222in" />
+<img src="images/media/image8.png" style="width:6.5in;height:4.47222in" />
 
-<img src="./kubernetes-basics/images/media/image18.png" style="width:6.5in;height:3.47222in" />
+<img src="images/media/image18.png" style="width:6.5in;height:3.47222in" />
 
-<img src="./kubernetes-basics/images/media/image27.png" style="width:6.5in;height:2.40278in" />
+<img src="images/media/image27.png" style="width:6.5in;height:2.40278in" />
 
 **Deployments - updates and rollbacks**
 
@@ -645,7 +645,7 @@ deployment revision is created named revision 2. This helps us keep
 track of the changes made to our deployment and enables us to roll back
 to a previous version of deployment if necessary.
 
-<img src="./kubernetes-basics/images/media/image45.png" style="width:6.5in;height:3.84722in" />
+<img src="images/media/image45.png" style="width:6.5in;height:3.84722in" />
 
 **Deployment Strategy**
 
@@ -665,9 +665,9 @@ one by one. This way, the application never goes down, and the upgrade
 is seamless. This strategy is called a **rolling update** and is the
 default one.
 
-<img src="./kubernetes-basics/images/media/image21.png" style="width:6.5in;height:2.91667in" />
+<img src="images/media/image21.png" style="width:6.5in;height:2.91667in" />
 
-<img src="./kubernetes-basics/images/media/image17.png" style="width:6.5in;height:2.98611in" />
+<img src="images/media/image17.png" style="width:6.5in;height:2.98611in" />
 
 **Upgrades in deployment**
 
@@ -676,7 +676,7 @@ a new deployment is created, say to deploy 5 replicas, it first creates
 a replica set automatically, which in turn creates the number of pods
 required to meet the number of replicas, as shown in the below image.
 
-<img src="./kubernetes-basics/images/media/image16.png" style="width:6.5in;height:3.13889in" />
+<img src="images/media/image16.png" style="width:6.5in;height:3.13889in" />
 
 Say, for instance, once you upgrade your application, you realize
 something isn’t very right, something’s wrong with the new version of
@@ -690,9 +690,9 @@ The deployment will then destroy the pods in the new replica set and
 bring the older ones up in the old replica set, and your application is
 back to its older format.
 
-<img src="./kubernetes-basics/images/media/image3.png" style="width:6.5in;height:2.97222in" />
+<img src="images/media/image3.png" style="width:6.5in;height:2.97222in" />
 
-<img src="./kubernetes-basics/images/media/image14.png" style="width:6.5in;height:4.13889in" />
+<img src="images/media/image14.png" style="width:6.5in;height:4.13889in" />
 
 **Networking**
 
@@ -713,13 +713,13 @@ through this IP, but accessing the other pods using this internal IP
 address may not be a good idea, as it’s subject to change when pods are
 recreated.
 
-<img src="./kubernetes-basics/images/media/image20.png" style="width:6.5in;height:5.36111in" />
+<img src="images/media/image20.png" style="width:6.5in;height:5.36111in" />
 
-<img src="./kubernetes-basics/images/media/image43.png" style="width:6.5in;height:2.88889in" />
+<img src="images/media/image43.png" style="width:6.5in;height:2.88889in" />
 
-<img src="./kubernetes-basics/images/media/image12.png" style="width:6.5in;height:4.41667in" />
+<img src="images/media/image12.png" style="width:6.5in;height:4.41667in" />
 
-<img src="./kubernetes-basics/images/media/image7.png" style="width:6.5in;height:3.88889in" />
+<img src="images/media/image7.png" style="width:6.5in;height:3.88889in" />
 
 1.  Kubernetes services
 
@@ -732,7 +732,7 @@ recreated.
 > service or web service that needs to be exposed, that needs to be
 > accessed by others.
 
-<img src="./kubernetes-basics/images/media/image6.png" style="width:6.5in;height:4.31944in" />
+<img src="images/media/image6.png" style="width:6.5in;height:4.31944in" />
 
 For example, our application has groups of pods running various
 sections, such as a group for serving front end load to users and other
@@ -771,7 +771,7 @@ application. This type of service is known as a node port service
 because the service listens to a port on the node and forward requests
 to the pods.
 
-<img src="./kubernetes-basics/images/media/image38.png" style="width:6.5in;height:3.20833in" />
+<img src="images/media/image38.png" style="width:6.5in;height:3.20833in" />
 
 There are other kinds of services available -
 
@@ -786,7 +786,7 @@ There are other kinds of services available -
     > would be to distribute load across the different web servers in
     > the front-end tier.
 
-<img src="./kubernetes-basics/images/media/image28.png" style="width:6.5in;height:3.02778in" />
+<img src="images/media/image28.png" style="width:6.5in;height:3.02778in" />
 
 NodePort - If we look at the NodePort service as below - there are three
 ports involved, the port on the pod where the actual web server is
@@ -801,11 +801,11 @@ service.
 Node ports can only be in a valid range, which by default is from 30000
 – 32767
 
-<img src="./kubernetes-basics/images/media/image5.png" style="width:6.5in;height:2.93056in" />
+<img src="images/media/image5.png" style="width:6.5in;height:2.93056in" />
 
-<img src="./kubernetes-basics/images/media/image22.png" style="width:6.5in;height:3.33333in" />
+<img src="images/media/image22.png" style="width:6.5in;height:3.33333in" />
 
-<img src="./kubernetes-basics/images/media/image2.png" style="width:6.5in;height:3.80556in" />
+<img src="images/media/image2.png" style="width:6.5in;height:3.80556in" />
 
 **Multiple Nodes in a Cluster**
 
@@ -818,7 +818,7 @@ any case, whether it be a single pod on a single node, multiple pods on
 a single node or multiple pods on multiple nodes, the service is created
 exactly the same.
 
-<img src="./kubernetes-basics/images/media/image24.png" style="width:6.5in;height:3.34722in" />
+<img src="images/media/image24.png" style="width:6.5in;height:3.34722in" />
 
 Selector helps us bind the service to the port with the same label. To
 link the service to a set of pods selector. The service makes an
@@ -833,7 +833,7 @@ In this case, the service creates a virtual IP inside the cluster to
 enable communication between different services, such as front end
 servers to a set of backend servers.
 
-<img src="./kubernetes-basics/images/media/image19.png" style="width:6.5in;height:4.05556in" />
+<img src="images/media/image19.png" style="width:6.5in;height:4.05556in" />
 
 The web front-end server needs to communicate to the backend servers and
 the backend servers need to communicate to the database, as well as the
@@ -852,14 +852,14 @@ name assigned to it inside the cluster, and that is the name that should
 be used by other pods to access the service. This type of service is
 known as **cluster IP** service. and is the default service in K8’s.
 
-<img src="./kubernetes-basics/images/media/image35.png" style="width:6.5in;height:3.04167in" />
+<img src="images/media/image35.png" style="width:6.5in;height:3.04167in" />
 
 **Load-balancer**
 
 The third type is a load balancer where it provisions a load balancer
 for our application in supported cloud providers.
 
-<img src="./kubernetes-basics/images/media/image46.png" style="width:6.5in;height:3.40278in" />
+<img src="images/media/image46.png" style="width:6.5in;height:3.40278in" />
 
 **maxSurge →** First kill the pod, then create.
 

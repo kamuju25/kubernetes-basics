@@ -694,5 +694,6 @@ kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml &gt; pod.ya
      --dry-run=client \\  
      -o yaml &gt; deployment.yaml
   - To get the current cluster - `kubectl config current-context`
-  - To get the list of services running in cluster - `kubectl get all`
-  - To check the list of services in a particular namespace - `kubectl get all -n <namespace>`
+  - To get the list of microservices running in cluster - `kubectl get all`
+  - To check the list of microservices in a particular namespace - `kubectl get all -n <namespace>`
+  - To get the service account list - `kubectl get sa`

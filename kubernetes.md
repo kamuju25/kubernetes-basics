@@ -589,9 +589,7 @@ exactly the same.
 
 <img src="images/media/image24.png" style="width:6.5in;height:3.34722in" />
 
-Selector helps us bind the service to the port with the same label. To
-link the service to a set of pods selector. The service makes an
-internal port accessible on a port on the node
+The selector links the Service to a set of Pods with matching labels. The Service then routes traffic from its own port to the application's targetPort on those Pods. If the Service type is NodePort, it makes that internal service accessible via a specific port on the Node's IP
 
 **Cluster-IP**
 

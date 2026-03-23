@@ -653,38 +653,38 @@ for our application in supported cloud providers.
   - To run the kubernetes yml script- `kubectl apply (or create) –f <scriptname.yml>` 
   - To know the kubernetes version – `kubectl version`
   - To delete the pod – `kubectl delete pod podname`
-  - To update or edit the image of the pod – kubectl edit pod redis
-  - To list the number of replica sets on the system – kubectl get replicaset or kubectl get rs
-  - To update or edit the replica set – kubectl edit replicaset rsname
-  - After the modifing the file, to increase the replicas – kubectl replace –f replicaset-definition.yml
-  - To scale up the replicas using command – kubectl scale -replicas=x(number of replicas) –f replicaset-definition.yml
-  - To create a replica set – kubectl create –f replicaset-definition.yml
-  - To delete the replica set – kubectl delete replicaset replicasetname (Also deletes pods in it)
-  - To run the updated replicaset file – kubectl replace –f replicaset-definition.yml name
-  - To list the number of deployments – kubectl get deploy
-  - To list the services – kubectl get services
-  - To get the target port configured on the service – kubectl describe service
-  - To see all the created objects at once – kubectl get all
-  - To list more info about deployments – kubectl describe deployment deploymentfilename
-  - To check the rollout status – kubectl rollout status deployment/deploymentname
-  - To check the history of deployment – kubectl rollout history deployment/deploymentname
-  - To roll back the deployment – kubectl rollout undo deployment/deploymentname.
-  - To create the deploment – kubectl create -f deployment definition.yml
-  - To list the deployments – kubectl get deployments
-  - To update the deployment – kubectl apply –f deployment-definition.yml (or) using image - Kubectl set image deployment/deploymentname old=new(ex:nginx-nginx:1.9.1) Using the image command the configuration also changes.
-  - To record the cause of change – kubectl create –f deployment.yaml -- record
-  - To edit the deployment – kubectl edit deployment deploymentname --record
-  - To know the deployment – kubectl get deployment deploymentname
+  - To update or edit the image of the pod – `kubectl edit pod redis`
+  - To list the number of replica sets on the system – `kubectl get replicaset or kubectl get rs`
+  - To update or edit the replica set – `kubectl edit replicaset rsname`
+  - After the modifing the file, to increase the replicas – `kubectl replace –f replicaset-definition.yml`
+  - To scale up the replicas using command – `kubectl scale -replicas=x(number of replicas) –f replicaset-definition.yml`
+  - To create a replica set – `kubectl create –f replicaset-definition.yml`
+  - To delete the replica set – `kubectl delete replicaset replicasetname` (Also deletes pods in it)
+  - To run the updated replicaset file – `kubectl replace –f replicaset-definition.yml name`
+  - To list the number of deployments – `kubectl get deploy`
+  - To list the services – `kubectl get services`
+  - To get the target port configured on the service – `kubectl describe service`
+  - To see all the created objects at once – `kubectl get all`
+  - To list more info about deployments – `kubectl describe deployment deploymentfilename`
+  - To check the rollout status – `kubectl rollout status deployment/deploymentname`
+  - To check the history of deployment – `kubectl rollout history deployment/deploymentname`
+  - To roll back the deployment – `kubectl rollout undo deployment/deploymentname`.
+  - To create the deploment – `kubectl create -f deployment definition.yml`
+  - To list the deployments – `kubectl get deployments`
+  - To update the deployment – `kubectl apply –f deployment-definition.yml` (or) using image - Kubectl set image deployment/deploymentname old=new(ex:nginx-nginx:1.9.1) Using the image command the configuration also changes.
+  - To record the cause of change – `kubectl create –f deployment.yaml -- record`
+  - To edit the deployment – `kubectl edit deployment deploymentname --record`
+  - To know the deployment – `kubectl get deployment deploymentname`
   - To run the script – scriptname run (example- /root/curl-test.sh run)
-  - To get pods and services together – kubectl get pods, svc
-  - To scale up the deployments – kubectl scale deployment deploymentname - - replicas=3
-  - To get short names for features on kubernetes - kubectl api-resources
-  - To list deployments across all namespaces in a Kubernetes cluster – kubectl get deployments -A
-  - To get the labels attached to the pod - kubectl get pods --show-labels
-  - To create a template creation using the index.html file or any other - kubectl create deployment nginx --image=nginx --dry-run=client -o=yaml &gt; deployment.yaml
+  - To get pods and services together –`kubectl get pods, svc`
+  - To scale up the deployments – `kubectl scale deployment deploymentname - - replicas=3`
+  - To get short names for features on kubernetes - `kubectl api-resources`
+  - To list deployments across all namespaces in a Kubernetes cluster – `kubectl get deployments -A`
+  - To get the labels attached to the pod - `kubectl get pods --show-labels`
+  - To create a template creation using the index.html file or any other - `kubectl create deployment nginx --image=nginx --dry-run=client -o=yaml &gt; deployment.yaml`
   - When you store secret in a file(in k8s), and you want to convert it to base64, always use -n in echo command, or else it will generate space at the end of the secret stored in a file → echo -n $string | base64
-  - To get nodes memory - kubectl top nodes
-  - To get pods memory- kubectl top pods
+  - To get nodes memory - `kubectl top nodes`
+  - To get pods memory- `kubectl top pods`
   - To create a Kubernetes pod with resource limits (CPU and memory) using the imperative method, use the kubectl run command with --dry-run=client to generate a YAML template, edit it to include limits, and apply it -
 kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml &gt; pod.yaml
   - To create a deployment using imperative method to generate a manifest file -
@@ -692,4 +692,7 @@ kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml &gt; pod.ya
      --image=nginx \\  
      --replicas=3 \\  
      --dry-run=client \\  
-     -o yaml &gt; deployment.yaml 
+     -o yaml &gt; deployment.yaml
+  - To get the current cluster - `kubectl config current-context`
+  - To get the list of services running in cluster - `kubectl get all`
+  - To check the list of services in a particular namespace - `kubectl get all -n <namespace>`

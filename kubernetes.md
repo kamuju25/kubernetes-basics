@@ -375,15 +375,9 @@ the changes will not be updated in the replicaset-definition.yml file.
 If the application needs to be updated with the newer version, which is
 deployed on many docker instances, it should be done one at a time
 instead of all at once, as the users using the application may not be
-impacted, such type of upgrade is known as rolling updates.
-
-Finally say for example you would like to make multiple changes to your
-environment such as upgrading
-
-the underlying Web Server versions as well as scaling your environment
-and also modifying the resource
-
-allocations etc. You do not want to apply each change immediately after
+impacted, such type of upgrade is known as rolling updates. Say for example you would like to make multiple changes to your
+environment, such as upgrading the underlying Web Server versions as well as scaling your environment
+and also modifying the resource allocations etc. You do not want to apply each change immediately after
 the command is run, instead you like to apply a pause to your
 environment, make the changes and then resume so that all the changes
 are rolled out together. All of these capabilities are available with

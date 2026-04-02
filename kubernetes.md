@@ -694,4 +694,84 @@ kubectl run nginx --image=&lt;imagename&gt; --dry-run=client -o yaml &gt; pod.ya
 
 Kubernetes uses Deployment and Service resources to reliably run applications, especially on environments like EKS. Containers by themselves are ephemeral, meaning they are short-lived, can crash, and when restarted their IP addresses change, and they do not automatically recover unless configured. Kubernetes solves this using scaling and auto-healing. Scaling allows multiple copies of a container to run during high traffic (for example, increasing from one instance to four or more) and reducing them when demand decreases. Auto-healing ensures that if a container crashes due to memory issues or process failure, Kubernetes automatically recreates it. This is handled by the Deployment resource, which creates a ReplicaSet that maintains a desired number of Pods (the smallest unit in Kubernetes that runs containers). If any pod fails, the ReplicaSet immediately creates a new one, ensuring the specified replica count is always maintained. This makes Kubernetes more reliable than running containers directly with Docker, because Deployment continuously manages scaling and recovery automatically.  
 
-In Kubernetes, the Service resource solves the critical service discovery problem that occurs when using containers directly. In a typical Docker setup, if a frontend container communicates with a backend container using its IP address, everything works until the backend restarts. When the backend container comes up again, its IP address may change, causing the frontend to fail because it still tries to connect to the old IP. This requires manual updates and restarts, making the system unreliable. Kubernetes solves this by introducing a Service that acts as a stable proxy between microservices. Instead of frontend pods communicating directly with backend pods, they communicate with the Service, which routes traffic to the correct backend pods. The Service does not rely on IP addresses; instead, it uses labels and selectors to identify pods. Even if backend pods are recreated and receive new IPs, the labels remain the same, allowing the Service to continuously discover and route traffic correctly. Typically, deployments create pods, and services provide stable communication between them using service names rather than IP addresses. Services can also expose applications to external users by providing a stable endpoint or public URL. Overall, Deployment handles scaling and auto-healing, while Service handles service discovery and stable communication, making Kubernetes applications reliable and resilient.  
+In Kubernetes, the Service resource solves the critical service discovery problem that occurs when using containers directly. In a typical Docker setup, if a frontend container communicates with a backend container using its IP address, everything works until the backend restarts. When the backend container comes up again, its IP address may change, causing the frontend to fail because it still tries to connect to the old IP. This requires manual updates and restarts, making the system unreliable. Kubernetes solves this by introducing a Service that acts as a stable proxy between microservices. Instead of frontend pods communicating directly with backend pods, they communicate with the Service, which routes traffic to the correct backend pods. The Service does not rely on IP addresses; instead, it uses labels and selectors to identify pods. Even if backend pods are recreated and receive new IPs, the labels remain the same, allowing the Service to continuously discover and route traffic correctly. Typically, deployments create pods, and services provide stable communication between them using service names rather than IP addresses. Services can also expose applications to external users by providing a stable endpoint or public URL. Overall, Deployment handles scaling and auto-healing, while Service handles service discovery and stable communication, making Kubernetes applications reliable and resilient.
+
+## Upgradation of K8's cluster important terms
+
+  - `Taint the node` → stop new pods from scheduling there
+  - `Cordon (cordon) the node` → mark node unschedulable (no new pods)
+  - `Drain the node` → evict existing pods from the node
+
+1. **Cordon node**
+
+  Cordon = mark node as unschedulable. No new pods will be scheduled, but existing pods keep running.
+
+```bash
+kubectl cordon <node-name>
+```
+**Result**:
+
+Existing pods stay
+No new pods scheduled
+
+Use case:
+
+Before maintenance
+Before draining
+
+2. **Drain node**
+
+Drain = remove all pods from node safely.
+
+```bash
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data
+```
+What happens:
+
+pods evicted  
+rescheduled to other nodes  
+node becomes empty  
+
+Used for:
+
+patching  
+upgrades  
+reboot  
+
+3. **Taint node**
+
+Taint = repel pods unless they tolerate it.
+
+Command:
+
+```bash
+kubectl taint nodes <node-name> key=value:NoSchedule
+```
+
+Now:
+
+pods won't schedule there  
+unless they have toleration  
+Differ
+Action	  Existing pods	        New pods
+cordon	      stay	            blocked
+drain	       removed	          blocked
+taint	        stay	             blocked (unless tolerated)
+Typical maintenance flow
+
+Ops usually do:
+
+```bash
+kubectl cordon node1
+kubectl drain node1 --ignore-daemonsets
+```
+Then:
+
+upgrade node  
+reboot  
+
+After done:
+
+```bash
+kubectl uncordon node1
+```

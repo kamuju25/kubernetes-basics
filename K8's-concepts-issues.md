@@ -159,13 +159,13 @@ Worker Node
 ```
 
 The Full Flow — Step by Step
-Step 1 — You run kubectl apply -f pod.yaml
+## Step 1 — You run kubectl apply -f pod.yaml
 kubectl sends an HTTP POST request to the kube-apiserver on the master node.
 
 ```bash
 kubectl  →  HTTPS request  →  kube-apiserver
 ```
-Step 2 — kube-apiserver validates and saves to etcd
+## Step 2 — kube-apiserver validates and saves to etcd
 kube-apiserver:
 
 Authenticates the request (are you allowed?)
@@ -181,7 +181,7 @@ etcd now has:
 }
 ```
 
-Step 3 — kube-scheduler notices the unassigned pod
+## Step 3 — kube-scheduler notices the unassigned pod
 kube-scheduler is constantly watching etcd via kube-apiserver for pods that have nodeName: null.
 It sees my-pod is pending with no node — kicks into action.
 

@@ -632,6 +632,85 @@ for our application in supported cloud providers.
 > class="underline">https://www.mirantis.com/cloud-native-concepts/getting-started-with-kubernetes/what-is-kubernetes-management/?utm\_source=google&utm\_medium=paidsearch&utm\_campaign=15835777586&utm\_adgroup=132106624541&utm\_content=598619916421&utm\_term=kubernetes%20engine%20cluster&utm\_region=america&utm\_focus=non-brand&gclid=Cj0KCQjwlK-WBhDjARIsAO2sErQz4FvDtAgpRWt4ej37mQg697nngebh8Qf7lPLvO3hXnfRZGDdEWmcaAqibEALw\_wcB</span>](https://www.mirantis.com/cloud-native-concepts/getting-started-with-kubernetes/what-is-kubernetes-management/?utm_source=google&utm_medium=paidsearch&utm_campaign=15835777586&utm_adgroup=132106624541&utm_content=598619916421&utm_term=kubernetes%20engine%20cluster&utm_region=america&utm_focus=non-brand&gclid=Cj0KCQjwlK-WBhDjARIsAO2sErQz4FvDtAgpRWt4ej37mQg697nngebh8Qf7lPLvO3hXnfRZGDdEWmcaAqibEALw_wcB)
 > 🡪 Kubernetes cluster
 
+## Node Scheduling in Kubernetes. 
+There are multiple ways to do it.
+
+1. nodeSelector (Simplest)
+Label a node, then tell the pod to only go to that node.
+```bash
+First, label your node
+kubectl label node worker-node-1 disk=ebs
+```
+```bash
+apiVersion: v1
+kind: Pod
+spec:
+  nodeSelector:
+    disk: ebs   # ← only schedule on nodes with this label
+  containers:
+    - name: app
+      image: nginx
+```
+2. nodeName (Direct Assignment)
+Hardcode a specific node — skips the scheduler entirely.
+
+```bash
+apiVersion: v1
+kind: Pod
+spec:
+  nodeName: worker-node-1   # ← always goes to this exact node
+  containers:
+    - name: app
+      image: nginx
+```
+⚠️ Not recommended in production — too rigid.
+
+3. nodeAffinity (Most Flexible)
+Like nodeSelector but with more powerful rules.
+
+```bash
+apiVersion: v1
+kind: Pod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:  # hard rule
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: disk
+                operator: In
+                values:
+                  - ebs   # only nodes with disk=ebs
+  containers:
+    - name: app
+      image: nginx
+```
+Two types of rules:
+requiredDuringSchedulingIgnoredDuringExecution --> Hard rule — must match, or pod won't schedule  
+preferredDuringSchedulingIgnoredDuringExecution --> Soft rule — try to match, but not mandatory  
+
+4. Taints & Tolerations (Opposite Approach)
+Instead of pod choosing a node, the node rejects pods unless they tolerate the taint.
+
+```bash
+Taint a node — repels all pods
+kubectl taint node worker-node-1 dedicated=ebs:NoSchedule
+```
+```bash
+Pod must have a toleration to land on that node
+apiVersion: v1
+kind: Pod
+spec:
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: ebs
+      effect: NoSchedule
+  containers:
+    - name: app
+      image: nginx
+```
+
 ## Commands
 
   - To create and run a single Pod in the Kubernetes cluster – `kubectl run podname --image=dockerimagname`

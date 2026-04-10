@@ -189,7 +189,7 @@ It sees my-pod is pending with no node — kicks into action.
 kube-scheduler:  "Hey! There's a pod with no node assigned, let me find the best node"
 ```
 
-Step 4 — Scheduler evaluates all nodes (two phases)
+## Step 4 — Scheduler evaluates all nodes (two phases)
 This is where the intelligence happens. Scheduler does this in 2 phases:
 Phase 1 — Filtering (eliminate unfit nodes)
 

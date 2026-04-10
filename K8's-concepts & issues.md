@@ -325,3 +325,24 @@ This is called the reconciliation loop or watch pattern
 etcd changes  →  components notice  →  they act  →  etcd changes again  →  repeat
 ```
 This is why Kubernetes is so resilient — each component independently does its job by just watching and reacting to state changes in etcd.
+
+## You have 10 nodes with 500GB of disk attached to each node. Let us say the node disk space reached 85% usage; then the pod we have deployed should get evicted and re-deployed on a node with better disk health. Explain if this can even be done?
+
+Kubernetes has a built-in feature called Node Pressure Eviction where the kubelet monitors node resources and evicts pods when thresholds are hit.  
+When disk hits a threshold — kubelet automatically evicts pods.
+
+What Happens After Eviction?
+
+```bash
+Node disk hits 85%
+      ↓
+kubelet evicts the pod  (NoExecute taint automatically added to node)
+      ↓
+kube-controller-manager notices pod is missing
+      ↓
+Creates a new pod object in etcd
+      ↓
+kube-scheduler picks a healthy node (filters out 85%+ disk nodes)
+      ↓
+Pod re-deploys on a node with better disk health
+```

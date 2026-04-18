@@ -138,7 +138,7 @@ Fix code
 Release new version
 Then new version has to be redeployed
 
-## How does the kubernetes scheduler quickly assign worker nodes for the pods? explain the internal working of k8's cluster? explain with an example in words
+## How does the kubernetes scheduler quickly assign worker nodes for the pods? explain the internal working of k8's cluster?
 
 Internal Working of Kubernetes Cluster  
 The entire flow from the moment you run `kubectl apply` to the pod running on a worker node.

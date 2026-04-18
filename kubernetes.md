@@ -315,6 +315,19 @@ to create and manage multiple identical Pod replicas.
 
 <img src="images/media/image11.png" style="width:6.5in;height:6.68056in" />
 
+## Simple Difference
+
+| | Spec #1 (Deployment) | Spec #2 (Pod) |
+|---|---|---|
+| **Belongs to** | Deployment object | Pod object (inside template) |
+| **Describes** | How to manage pods | What runs inside the pod |
+| **Contains** | `replicas`, `selector`, `template` | `containers`, `volumes`, `probes` |
+
+## In One Line
+
+**Spec #1** tells Kubernetes *how many pods to run and how to manage them*.  
+**Spec #2** tells Kubernetes *what goes inside each pod*.  
+
 <img src="images/media/image25.png" style="width:6.5in;height:6.70833in" />
 
 <img src="images/media/image41.png" style="width:6.5in;height:3.72222in" />

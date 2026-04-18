@@ -344,8 +344,9 @@ specified under it to the labels of the Pods. The ReplicaSet selector
 also provides many other options for matching Labels that were not
 available in a Replication Controller.
 
-<img src="images/media/image39.png" style="width:6.5in;height:3.59896in" />**Labels
-and selectors**
+<img src="images/media/image39.png" style="width:6.5in;height:3.59896in" />
+
+**Labels and selectors**
 
 Why do we label the pods and objects in kubernetes? The role of the
 replica set is to monitor the pods(which are already created or else

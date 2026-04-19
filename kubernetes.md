@@ -543,7 +543,7 @@ our laptop through the node to the pod running the web container. This
 is where the K8’s service comes into play. The K8’s service is an
 object, just like pods, replica sets or deployments that we worked with
 before. One of its use cases is to listen to ports on the node and
-forward requests on that board to a port on the port running the web
+forward requests on that port to a port on the pod running the web
 application. This type of service is known as a node port service
 because the service listens to a port on the node and forward requests
 to the pods.

@@ -349,7 +349,14 @@ Pod re-deploys on a node with better disk health
 
 ## How the Kubernetes Secrets Store CSI Driver works, specifically in conjunction with AWS Secrets & Configuration Provider (ASCP), and how secrets are securely fetched and mounted into a pod at runtime?
 
-Kubernetes itself doesn’t know how to fetch secrets from external systems like AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault.
+The Kubernetes Secrets Store CSI Driver is a Container Storage Interface (CSI) plugin that lets Kubernetes mount secrets from external secret managers directly into pods as volumes.
+
+Instead of storing secrets in Kubernetes (Secret objects), it fetches them from providers like:
+
+AWS Secrets Manager / SSM Parameter Store (via ASCP)  
+Azure Key Vault  
+HashiCorp Vault  
+Google Secret Manager  
 
 That’s where these pieces come in:
 

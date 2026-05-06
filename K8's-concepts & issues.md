@@ -347,7 +347,7 @@ kube-scheduler picks a healthy node (filters out 85%+ disk nodes)
 Pod re-deploys on a node with better disk health
 ```
 
-How the Kubernetes Secrets Store CSI Driver works, specifically in conjunction with AWS Secrets & Configuration Provider (ASCP), and how secrets are securely fetched and mounted into a pod at runtime?
+## How the Kubernetes Secrets Store CSI Driver works, specifically in conjunction with AWS Secrets & Configuration Provider (ASCP), and how secrets are securely fetched and mounted into a pod at runtime?
 
 Kubernetes itself doesn’t know how to fetch secrets from external systems like AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault.
 
@@ -421,7 +421,7 @@ ASCP makes the AWS API call and returns the value.
 
 This happens during pod startup.
 
-Step 1: Pod spec requests CSI volume
+## Step 1: Pod spec requests CSI volume
 
 Example:
 
@@ -437,7 +437,7 @@ volumes:
 This tells Kubernetes:  
 Use the Secrets Store CSI driver for this volume  
 
-Step 2: CSI driver looks up SecretProviderClass  
+## Step 2: CSI driver looks up SecretProviderClass  
 
 It finds:
 
@@ -449,13 +449,13 @@ metadata:
 spec:
   provider: aws
 ```
-Step 3: CSI driver calls ASCP
+## Step 3: CSI driver calls ASCP
 
 It asks:
 
 Fetch secrets defined here
 
-Step 4: ASCP authenticates to AWS  
+## Step 4: ASCP authenticates to AWS  
 
 Usually using:
 

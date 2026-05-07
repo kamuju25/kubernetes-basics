@@ -527,6 +527,106 @@ temporary credentials
 automatic rotation  
 IAM-based access control  
 
+### What is Pod Identity Association?
+
+A Pod Identity Association in EKS is a mapping between:
+
+```bash
+Kubernetes ServiceAccount
+        ↔
+AWS IAM Role
+```
+It tells AWS:
+
+“Any pod using this ServiceAccount is allowed to use this IAM role.”  
+
+It is basically a permission link between Kubernetes and AWS IAM.  
+
+Example
+
+Suppose you create this association:
+
+```bash
+Namespace: kube-system
+ServiceAccount: ebs-csi-controller-sa
+        ↓
+IAM Role: AmazonEKS_EBS_CSI_DriverRole
+```
+This means:
+
+Any pod running with the ebs-csi-controller-sa ServiceAccount can get AWS permissions from the AmazonEKS_EBS_CSI_DriverRole IAM role.
+
+Step 1 — Pod Starts
+
+A pod starts in Kubernetes.
+
+Example:
+
+serviceAccountName: ebs-csi-controller-sa
+
+So the pod is running using that ServiceAccount.
+
+Step 2 — Pod Needs AWS Access
+
+The application inside the pod tries to access AWS services.
+
+Example:
+
+create EBS volume  
+read S3 bucket  
+access DynamoDB  
+Step 3 — Pod Requests Credentials  
+
+The pod asks the EKS Pod Identity Agent for AWS credentials.
+
+Step 4 — Agent Checks Pod Identity Association
+
+The agent checks:
+
+"Is this ServiceAccount associated with any IAM role?"
+
+It checks:
+
+cluster  
+namespace  
+ServiceAccount name  
+
+Step 5 — Matching Association Found
+
+The agent finds:
+
+ebs-csi-controller-sa
+        ↓
+AmazonEKS_EBS_CSI_DriverRole
+
+So AWS confirms:
+
+“This pod is allowed to use this IAM role.”
+
+Step 6 — Temporary AWS Credentials Generated
+
+AWS generates temporary credentials for that IAM role.
+
+These credentials include:
+
+Access Key  
+Secret Key  
+Session Token  
+
+Step 7 — Agent Gives Credentials to Pod
+
+The Pod Identity Agent securely delivers the temporary credentials to the pod.
+
+Step 8 — Pod Accesses AWS Services
+
+Now the pod can call AWS APIs using the permissions of that IAM role.
+
+Example:
+
+CreateVolume  
+AttachVolume  
+DeleteVolume  
+
 ### Can you explain how the Amazon EBS CSI components work together in Kubernetes — specifically the EBS CSI Node plugin, EBS CSI Controller, EBS CSI Controller Service Account, Persistent Volumes (PV), Persistent Volume Claims (PVC), and VolumeClaimTemplates — with a practical example showing how storage is dynamically provisioned and attached to pods?
 
 In Kubernetes, the EBS CSI driver is what allows pods running in a cluster (typically on AWS EKS) to dynamically create and attach AWS EBS volumes.

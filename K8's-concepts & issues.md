@@ -366,12 +366,23 @@ That’s where these pieces come in:
 
 Think of it like this:
 
-Pod asks for a volume  
-→ CSI driver intercepts  
-→ CSI driver calls provider (ASCP)  
-→ ASCP fetches secret from AWS Secrets Manager / SSM Parameter Store  
-→ Secret gets mounted inside pod filesystem  
-
+```bash
+Pod starts
+   ↓
+Pod requests CSI volume
+   ↓
+CSI Driver intercepts mount request
+   ↓
+CSI Driver reads SecretProviderClass
+   ↓
+CSI Driver calls ASCP with those instructions
+   ↓
+ASCP fetches secrets from AWS
+   ↓
+Secrets returned to CSI Driver
+   ↓
+CSI Driver mounts files into pod
+```
 1. What is Secrets Store CSI Driver?
 
 CSI = Container Storage Interface

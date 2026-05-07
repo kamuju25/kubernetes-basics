@@ -485,3 +485,33 @@ Files appear inside container:
 /mnt/secrets-store/api-key
 
 Your app reads them like normal files.
+
+### What is the EKS Pod Identity Agent?
+
+The EKS Pod Identity Agent is a component in Amazon EKS that helps Kubernetes pods securely obtain temporary AWS credentials without storing AWS access keys inside containers.
+
+It acts as a credential provider/broker between:
+
+Kubernetes Pod  ↔  AWS IAM
+Why do we need it?
+Applications running in pods often need access to AWS services:
+
+  - Secrets Manager  
+  - S3
+  - DynamoDB
+  - SQS
+  - Parameter Store
+
+Without Pod Identity Agent, you might:
+
+hardcode AWS keys  
+store credentials in Kubernetes Secrets  
+manually rotate credentials  
+
+That is insecure and difficult to manage.  
+
+The Pod Identity Agent solves this by providing:  
+
+temporary credentials  
+automatic rotation  
+IAM-based access control  
